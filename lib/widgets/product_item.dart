@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/product.dart';
-import 'package:shop_app/screens/product_detal_screen.dart';
+import 'package:shop_app/screens/product_details_screen.dart';
 
 class ProductItem extends StatelessWidget {
-  final ProductModel productModel;
+  final String id;
+  final String title;
+  final double price;
+  final String imageUrl;
 
-  ProductItem(this.productModel);
+  ProductItem(this.id, this.title, this.price, this.imageUrl);
 
   @override
   Widget build(BuildContext context) {
@@ -14,18 +17,18 @@ class ProductItem extends StatelessWidget {
       child: GridTile(
         child: GestureDetector(
           child: Image.network(
-            productModel.imageUrl,
+            imageUrl,
             fit: BoxFit.cover,
           ),
           onTap: () => Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (ctx) => ProductDetailsScreen(productModel.title),
+              builder: (ctx) => ProductDetailsScreen(),
             ),
           ),
         ),
         header: Container(
           child: Text(
-            productModel.title,
+            title,
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white),
           ),
@@ -34,7 +37,7 @@ class ProductItem extends StatelessWidget {
         footer: GridTileBar(
           backgroundColor: Colors.black54,
           title: Text(
-            productModel.price.toString(),
+            price.toString(),
             textAlign: TextAlign.center,
           ),
           leading: IconButton(
