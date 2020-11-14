@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/models/product.dart';
+import 'package:shop_app/providers/product.dart';
 
-class ProductsProvider with ChangeNotifier{
+class ProductsProvider with ChangeNotifier {
   List<ProductModel> _items = [
     ProductModel(
       id: 'p1',
@@ -9,7 +9,7 @@ class ProductsProvider with ChangeNotifier{
       description: 'A red shirt - it is pretty red!',
       price: 29.99,
       imageUrl:
-      'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+          'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
     ),
     ProductModel(
       id: 'p2',
@@ -17,7 +17,7 @@ class ProductsProvider with ChangeNotifier{
       description: 'A nice pair of trousers.',
       price: 59.99,
       imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trousers%2C_dress_%28AM_1960.022-8%29.jpg/512px-Trousers%2C_dress_%28AM_1960.022-8%29.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trousers%2C_dress_%28AM_1960.022-8%29.jpg/512px-Trousers%2C_dress_%28AM_1960.022-8%29.jpg',
     ),
     ProductModel(
       id: 'p3',
@@ -25,7 +25,7 @@ class ProductsProvider with ChangeNotifier{
       description: 'Warm and cozy - exactly what you need for the winter.',
       price: 19.99,
       imageUrl:
-      'https://live.staticflickr.com/4043/4438260868_cc79b3369d_z.jpg',
+          'https://live.staticflickr.com/4043/4438260868_cc79b3369d_z.jpg',
     ),
     ProductModel(
       id: 'p4',
@@ -33,47 +33,72 @@ class ProductsProvider with ChangeNotifier{
       description: 'Prepare any meal you want.',
       price: 49.99,
       imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
     ),
     ProductModel(
-      id: 'p1',
+      id: 'p5',
       title: 'Red Shirt',
       description: 'A red shirt - it is pretty red!',
       price: 29.99,
       imageUrl:
-      'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+          'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
     ),
     ProductModel(
-      id: 'p2',
+      id: 'p6',
       title: 'Trousers',
       description: 'A nice pair of trousers.',
       price: 59.99,
       imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trousers%2C_dress_%28AM_1960.022-8%29.jpg/512px-Trousers%2C_dress_%28AM_1960.022-8%29.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trousers%2C_dress_%28AM_1960.022-8%29.jpg/512px-Trousers%2C_dress_%28AM_1960.022-8%29.jpg',
     ),
     ProductModel(
-      id: 'p3',
+      id: 'p7',
       title: 'Yellow Scarf',
       description: 'Warm and cozy - exactly what you need for the winter.',
       price: 19.99,
       imageUrl:
-      'https://live.staticflickr.com/4043/4438260868_cc79b3369d_z.jpg',
+          'https://live.staticflickr.com/4043/4438260868_cc79b3369d_z.jpg',
     ),
     ProductModel(
-      id: 'p4',
+      id: 'p8',
       title: 'A Pan',
       description: 'Prepare any meal you want.',
       price: 49.99,
       imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
     ),
   ];
 
-  List<ProductModel> get items => [..._items];
+  // var _isFavoritesOnly = false;
 
-  void addProduct(){
+  List<ProductModel> get items {
+    // if (_isFavoritesOnly)
+    //   return _items.where((element) => element.isFavorite).toList();
+    return [..._items];
+  }
+
+  List<ProductModel> get favoriteItems {
+    return _items.where((e) => e.isFavorite).toList();
+  }
+
+  // void showFavoritesOnly(){
+  //   _isFavoritesOnly = true;
+  //   notifyListeners();
+  // }
+  //
+  // void showAll(){
+  //   _isFavoritesOnly = false;
+  //   notifyListeners();
+  // }
+
+  void addProduct() {
     // assert(productModel != null);
     // _items.add(productModel);
     notifyListeners();
+  }
+
+  ProductModel findById(String id) {
+    return _items.firstWhere((element) => element.id == id);
+    ;
   }
 }

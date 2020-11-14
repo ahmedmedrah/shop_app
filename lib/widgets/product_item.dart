@@ -1,34 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/models/product.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/providers/cart.dart';
+import 'package:shop_app/providers/product.dart';
 import 'package:shop_app/screens/product_details_screen.dart';
 
 class ProductItem extends StatelessWidget {
-  final String id;
-  final String title;
-  final double price;
-  final String imageUrl;
-
-  ProductItem(this.id, this.title, this.price, this.imageUrl);
 
   @override
   Widget build(BuildContext context) {
+    final product = Provider.of<ProductModel>(context, listen: false);
+    final cart = Provider.of<Cart>(context,listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         child: GestureDetector(
           child: Image.network(
-            imageUrl,
+            product.imageUrl,
             fit: BoxFit.cover,
           ),
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (ctx) => ProductDetailsScreen(),
-            ),
-          ),
+          onTap: () => Navigator.of(context)
+              .pushNamed(ProductDetailsScreen.ROUTENAME, arguments: product.id),
         ),
         header: Container(
           child: Text(
-            title,
+            product.title,
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white),
           ),
@@ -37,17 +32,25 @@ class ProductItem extends StatelessWidget {
         footer: GridTileBar(
           backgroundColor: Colors.black54,
           title: Text(
-            price.toString(),
+            product.price.toString(),
             textAlign: TextAlign.center,
           ),
-          leading: IconButton(
-            icon: Icon(Icons.favorite),
-            onPressed: () {},
-            color: Theme.of(context).accentColor,
+          leading: Consumer<ProductModel>(
+            builder: (ctx, product, child) => IconButton(
+              icon: product.isFavorite
+                  ? Icon(Icons.favorite)
+                  : Icon(Icons.favorite_border),
+              onPressed: () {
+                product.toggleFavorite();
+              },
+              color: Theme.of(context).accentColor,
+            ),
           ),
           trailing: IconButton(
             icon: Icon(Icons.shopping_cart),
-            onPressed: () {},
+            onPressed: () {
+              cart.addItem(product.id, product.price, product.title);
+            },
             color: Theme.of(context).accentColor,
           ),
         ),
