@@ -42,22 +42,23 @@ class _OrderItemState extends State<OrderItem> {
               height: min(widget.order.products.length * 20 + 30.0, 140),
               padding: EdgeInsets.all(8),
               child: ListView.builder(
-                  itemCount: widget.order.products.length,
-                  itemBuilder: (ctx, i) => Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            widget.order.products[i].title,
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            '\$${widget.order.products[i].price}\tx\t${widget.order.products[i].quantity}',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      )),
+                itemCount: widget.order.products.length,
+                itemBuilder: (ctx, i) => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.order.products[i].title,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      '\$${widget.order.products[i].price}\tx\t${widget.order.products[i].quantity}',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
             )
         ],
       ),
