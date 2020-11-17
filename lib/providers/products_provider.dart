@@ -91,14 +91,27 @@ class ProductsProvider with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  void addProduct() {
-    // assert(productModel != null);
-    // _items.add(productModel);
+  void addProduct(ProductModel productModel) {
+    assert(productModel != null);
+    productModel.id = DateTime.now().toString();
+    _items.add(productModel);
+    notifyListeners();
+  }
+
+  void updateProduct(String id,ProductModel product){
+    final index = _items.indexWhere((element) => element.id == id);
+    if(index >= 0 ) {
+      _items[index] = product;
+      notifyListeners();
+    }
+  }
+
+  void deleteProduct(String id){
+    _items.removeWhere((element) => element.id == id);
     notifyListeners();
   }
 
   ProductModel findById(String id) {
     return _items.firstWhere((element) => element.id == id);
-    ;
   }
 }
