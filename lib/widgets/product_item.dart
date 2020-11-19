@@ -26,7 +26,7 @@ class ProductItem extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white),
           ),
-          color: Colors.black45,
+          color: Colors.black54,
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black54,
