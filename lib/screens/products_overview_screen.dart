@@ -13,7 +13,7 @@ enum menuOptions {
 }
 
 class ProductOverviewScreen extends StatefulWidget {
-  static const String ROUTENAME = '/';
+  static const String ROUTENAME = '/products_overview';
 
   @override
   _ProductOverviewScreenState createState() => _ProductOverviewScreenState();

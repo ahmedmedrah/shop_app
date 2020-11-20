@@ -54,7 +54,7 @@ class _OrderItemState extends State<OrderItem> {
                     Text(
                       '\$${widget.order.products[i].price}\tx\t${widget.order.products[i].quantity}',
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 14),
                     ),
                   ],
                 ),

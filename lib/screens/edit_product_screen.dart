@@ -25,7 +25,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _imageUrlController.dispose();
     super.dispose();
   }
