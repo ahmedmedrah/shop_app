@@ -1,6 +1,10 @@
 # shop_app
 
-A new Flutter application.
+dummy flutter shop app applying:
+
+- the provider package, 
+- http requests dealing with RESTful API; authentication, send data, fetch data, update data. 
+- and error handling methods.
 
 ## Getting Started
 
