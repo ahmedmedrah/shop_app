@@ -15,7 +15,7 @@ class OrdersScreen extends StatelessWidget {
       ),
       drawer: AppDrawer(),
       body: FutureBuilder(
-        future: Provider.of<Orders>(context, listen: false).fetchOrders(),
+        future: Provider.of<OrdersProvider>(context, listen: false).fetchOrders(),
         builder: (ctx, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -24,7 +24,7 @@ class OrdersScreen extends StatelessWidget {
               child: Text('Error Occured'),
             );
           } else {
-            return Consumer<Orders>(builder: (ctx, ordersData, child) {
+            return Consumer<OrdersProvider>(builder: (ctx, ordersData, child) {
               return ListView.builder(
                 itemCount: ordersData.orders.length,
                 itemBuilder: (ctx, i) => OrderItem(ordersData.orders[i]),

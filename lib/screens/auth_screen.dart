@@ -8,7 +8,7 @@ import 'package:shop_app/providers/auth.dart';
 enum AuthMode { Signup, Login }
 
 class AuthScreen extends StatelessWidget {
-  static const routeName = '/auth';
+  static const ROUTENAME = '/auth';
 
   @override
   Widget build(BuildContext context) {
@@ -109,11 +109,11 @@ class _AuthCardState extends State<AuthCard> {
   final _passwordController = TextEditingController();
 
   void _showErrorDialog(String message){
-    showDialog<void>(
+    showDialog(
       context: context,
       barrierDismissible: false,
       // false = user must tap button, true = tap outside dialog
-      builder: (BuildContext dialogContext) {
+      builder: (ctx) {
         return AlertDialog(
           title: Text('An Error Occurred'),
           content: Text(message),
@@ -121,7 +121,7 @@ class _AuthCardState extends State<AuthCard> {
             FlatButton(
               child: Text('Okay'),
               onPressed: () {
-                Navigator.of(dialogContext).pop(); // Dismiss alert dialog
+                Navigator.of(ctx).pop(); // Dismiss alert dialog
               },
             ),
           ],
@@ -143,7 +143,7 @@ class _AuthCardState extends State<AuthCard> {
       if (_authMode == AuthMode.Login) {
         // Log user in
         await Provider.of<Auth>(context, listen: false)
-            .logIn(_authData['email'], _authData['password']);
+            .login(_authData['email'], _authData['password']);
       } else {
         // Sign up user
         await Provider.of<Auth>(context, listen: false)

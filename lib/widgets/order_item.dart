@@ -5,7 +5,7 @@ import 'package:shop_app/providers/orders.dart';
 import 'package:intl/intl.dart';
 
 class OrderItem extends StatefulWidget {
-  final OrderItemModel order;
+  final OrderModel order;
 
   OrderItem(this.order);
 

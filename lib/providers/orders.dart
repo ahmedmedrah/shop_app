@@ -3,13 +3,13 @@ import 'package:shop_app/providers/cart.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class OrderItemModel {
+class OrderModel {
   final String id;
   final double amount;
   final List<CartItemModel> products;
   final DateTime time;
 
-  OrderItemModel({
+  OrderModel({
     @required this.id,
     @required this.products,
     @required this.amount,
@@ -17,15 +17,20 @@ class OrderItemModel {
   });
 }
 
-class Orders with ChangeNotifier {
-  List<OrderItemModel> _orders = [];
+class OrdersProvider with ChangeNotifier {
+  List<OrderModel> _orders = [];
+  final authToken;
+  final userId;
 
-  List<OrderItemModel> get orders {
+  OrdersProvider(this.authToken, this.userId, this._orders);
+
+  List<OrderModel> get orders {
     return [..._orders];
   }
 
   Future<void> addOrder(List<CartItemModel> cartProducts, double total) async {
-    const url = 'https://shop-app-e4901.firebaseio.com/orders.json';
+    final url =
+        'https://shop-app-e4901.firebaseio.com/orders/$userId.json?auth=$authToken';
     final timeStamp = DateTime.now();
     try {
       final response = await http.post(url,
@@ -43,7 +48,7 @@ class Orders with ChangeNotifier {
           }));
       _orders.insert(
         0,
-        OrderItemModel(
+        OrderModel(
           id: json.decode(response.body)['name'],
           products: cartProducts,
           amount: total,
@@ -58,15 +63,15 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> fetchOrders() async {
-    const url = 'https://shop-app-e4901.firebaseio.com/orders.json';
+    final url =
+        'https://shop-app-e4901.firebaseio.com/orders/$userId.json?auth=$authToken';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      if(extractedData == null)
-        return;
-      final List<OrderItemModel> loadedOrders = [];
+      if (extractedData == null) return;
+      final List<OrderModel> loadedOrders = [];
       extractedData.forEach((ordId, ordData) {
-        loadedOrders.add(OrderItemModel(
+        loadedOrders.add(OrderModel(
             id: ordId,
             products: (ordData['products'] as List<dynamic>)
                 .map((e) => CartItemModel(
