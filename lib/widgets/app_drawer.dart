@@ -26,6 +26,8 @@ class AppDrawer extends StatelessWidget {
             title: Text('Orders'),
             onTap: () => Navigator.of(context)
                 .pushReplacementNamed(OrdersScreen.ROUTENAME),
+            //Navigator.of(context).pushReplacement(CustomRoute(
+            //               builder: (ctx) => OrdersScreen(),
           ),
           Divider(),
           ListTile(

@@ -15,9 +15,15 @@ class ProductItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         child: GestureDetector(
-          child: Image.network(
-            product.imageUrl,
-            fit: BoxFit.contain,
+          child: Hero(
+            tag: product.id,
+            child: FadeInImage(fadeInDuration: Duration(milliseconds: 200),
+              placeholder: AssetImage('assets/images/product-placeholder.png'),
+              image: NetworkImage(
+                product.imageUrl,
+              ),
+              fit: BoxFit.contain,
+            ),
           ),
           onTap: () => Navigator.of(context)
               .pushNamed(ProductDetailsScreen.ROUTENAME, arguments: product.id),
@@ -27,13 +33,14 @@ class ProductItem extends StatelessWidget {
             product.title,
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white),
+            overflow: TextOverflow.ellipsis,
           ),
           color: Colors.black54,
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black54,
           title: Text(
-            product.price.toString(),
+            '\$${product.price.toStringAsFixed(2)}',
             textAlign: TextAlign.center,
           ),
           leading: Consumer<ProductModel>(
