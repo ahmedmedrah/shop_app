@@ -110,6 +110,7 @@ class _AuthCardState extends State<AuthCard>
   final _passwordController = TextEditingController();
   AnimationController _controller;
   Animation<Offset> _slideAnimation;
+
   // Animation<double> _opacityAnimation;
 
   @override
@@ -117,8 +118,8 @@ class _AuthCardState extends State<AuthCard>
     _controller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
     _slideAnimation = Tween<Offset>(
-      begin: Offset(0,-1.5),
-      end: Offset(0,0),
+      begin: Offset(0, -1.5),
+      end: Offset(0, 0),
     ).animate(
       CurvedAnimation(
         parent: _controller,
@@ -273,23 +274,23 @@ class _AuthCardState extends State<AuthCard>
                   curve: Curves.easeIn,
                   // child: FadeTransition(
                   //   opacity: _opacityAnimation,
-                    child: SlideTransition(
-                      position: _slideAnimation,
-                      child: TextFormField(
-                        enabled: _authMode == AuthMode.Signup,
-                        decoration:
-                            InputDecoration(labelText: 'Confirm Password'),
-                        obscureText: true,
-                        validator: _authMode == AuthMode.Signup
-                            ? (value) {
-                                if (value != _passwordController.text) {
-                                  return 'Passwords do not match!';
-                                }
-                                return null;
+                  child: SlideTransition(
+                    position: _slideAnimation,
+                    child: TextFormField(
+                      enabled: _authMode == AuthMode.Signup,
+                      decoration:
+                          InputDecoration(labelText: 'Confirm Password'),
+                      obscureText: true,
+                      validator: _authMode == AuthMode.Signup
+                          ? (value) {
+                              if (value != _passwordController.text) {
+                                return 'Passwords do not match!';
                               }
-                            : null,
-                      ),
+                              return null;
+                            }
+                          : null,
                     ),
+                  ),
                   // ),
                 ),
                 SizedBox(

@@ -56,6 +56,7 @@ class ProductItem extends StatelessWidget {
           ),
           Text(
             '\$${product.price.toStringAsFixed(2)}',
+            style: TextStyle(fontWeight: FontWeight.bold),
             // textAlign: TextAlign.center,
           ),
           Expanded(
