@@ -11,7 +11,7 @@ class Auth with ChangeNotifier {
   String _token;
   DateTime _expiryDate;
   String _userId;
-  final _apiKey = 'AIzaSyDTHDlO71yjjdkhxgi3dtWzm-QWhuhsg0s'; //gitignore
+  final _apiKey = ''; //gitignore
   Timer _authTimer;
 
   bool get isAuth {
